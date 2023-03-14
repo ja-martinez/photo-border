@@ -8,7 +8,7 @@ function AdditionalBorderInput({ additionalBorder, setAdditionalBorder }) {
         name="additional-border"
         type="range"
         min="0"
-        max="12"
+        max="10"
         step="0.1"
         value={additionalBorder}
         onInput={(e) => setAdditionalBorder(e.target.value)}

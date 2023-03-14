@@ -14,6 +14,7 @@ import AdditionalBorderInput from "./AdditionalBorderInput";
 import "./Editor.css";
 
 const INITIAL_COLOR = "#797979";
+const MAX_CANVAS_AREA = 16777216;
 
 function Editor({ image, onFileChange }) {
   const [aspectRatio, setAspectRatio] = useState(1);
@@ -32,6 +33,11 @@ function Editor({ image, onFileChange }) {
   );
   const finalWidth = width + horizontalBorder * 2;
   const finalHeight = height + verticalBorder * 2;
+
+  // check if canvas size will exceed safari limits (16,777,216 sq. px)
+  if (finalWidth * finalHeight > MAX_CANVAS_AREA) {
+
+  }
 
   // put border image on canvas
   useEffect(() => {
@@ -92,14 +98,14 @@ function getBorderSize(width, height, aspectRatio, additionalBorder) {
   // borderSize.horizontalBorder += 10 * additionalBorder * aspectRatio
   // borderSize.verticalBorder += 10 * additionalBorder
   
-  // Additional Border goes up to 12, where the border's in the largest dimension take up half total space
+  // Additional Border goes up to 10, where the border's in the largest dimension take up half total space
   if (height > width) {
-    const additionalBorderUnit = ((height / 2 - borderSize.verticalBorder)) / 12;
+    const additionalBorderUnit = ((height / 2 - borderSize.verticalBorder)) / 10;
     // additional border is relative to height
     borderSize.verticalBorder += additionalBorder * additionalBorderUnit;
     borderSize.horizontalBorder += borderSize.verticalBorder * aspectRatio
   } else {
-    const additionalBorderUnit = ((width / 2 - borderSize.horizontalBorder)) / 12;
+    const additionalBorderUnit = ((width / 2 - borderSize.horizontalBorder)) / 10;
     // additional border is relative to width
     borderSize.horizontalBorder += additionalBorder * additionalBorderUnit;
     borderSize.verticalBorder += borderSize.horizontalBorder / aspectRatio
@@ -114,7 +120,7 @@ function getMinBorderSize(width, height, aspectRatio) {
     to get desired aspect ratio
   */
 
-  const currAspectRatio = width / height;
+  const originalAspectRatio = width / height;
 
   const borderSize = {
     horizontalBorder: 0,
@@ -122,7 +128,7 @@ function getMinBorderSize(width, height, aspectRatio) {
   };
 
   // need to add height/make it narrower
-  if (currAspectRatio > aspectRatio) {
+  if (originalAspectRatio > aspectRatio) {
     // aspectRatio = width / (height + x)
     // x = width / aspectRatio - height
 
@@ -133,7 +139,7 @@ function getMinBorderSize(width, height, aspectRatio) {
   }
 
   // need to add width/make it wider
-  if (currAspectRatio < aspectRatio) {
+  if (originalAspectRatio < aspectRatio) {
     // aspectRatio = (width + x) / height
     // x = aspectRatio * height - width
 
