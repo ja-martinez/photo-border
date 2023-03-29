@@ -5,6 +5,11 @@ check canvas size if browser is safari and resize accordingly
 release canvas when opening another image
 
 */
+
+/*
+can we check browser to only do canvas area limit on safari and iphone?
+*/
+
 import { useState, useRef, useEffect } from "react";
 import ExportButton from "./ExportButton";
 import ImageInput from "./ImageInput";
@@ -23,20 +28,36 @@ function Editor({ image, onFileChange }) {
   const canvasRef = useRef(null);
 
   // get border and final size
-  const width = image.naturalWidth;
-  const height = image.naturalHeight;
-  const { horizontalBorder, verticalBorder } = getBorderSize(
+  let width = image.naturalWidth;
+  let height = image.naturalHeight;
+  let { horizontalBorder, verticalBorder } = getBorderSize(
     width,
     height,
     aspectRatio,
     additionalBorder
   );
-  const finalWidth = width + horizontalBorder * 2;
-  const finalHeight = height + verticalBorder * 2;
+  let finalWidth = width + horizontalBorder * 2;
+  let finalHeight = height + verticalBorder * 2;
+  console.log(finalWidth, finalHeight);
 
   // check if canvas size will exceed safari limits (16,777,216 sq. px)
   if (finalWidth * finalHeight > MAX_CANVAS_AREA) {
+    ({ width, height } = getScaledImageDimensionsCanvas(
+      width,
+      height,
+      aspectRatio,
+      additionalBorder
+    ));
 
+    ({ horizontalBorder, verticalBorder } = getBorderSize(
+      width,
+      height,
+      aspectRatio,
+      additionalBorder
+    ));
+
+    finalWidth = width + horizontalBorder * 2;
+    finalHeight = height + verticalBorder * 2;
   }
 
   // put border image on canvas
@@ -49,8 +70,8 @@ function Editor({ image, onFileChange }) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // add image to canvas
-    ctx.drawImage(image, horizontalBorder, verticalBorder);
-  }, [image, horizontalBorder, verticalBorder, color]);
+    ctx.drawImage(image, horizontalBorder, verticalBorder, width, height);
+  }, [image, horizontalBorder, verticalBorder, color, width, height]);
 
   function onExport() {
     const url = canvasRef.current.toDataURL("image/jpeg", 1.0);
@@ -92,23 +113,29 @@ function Editor({ image, onFileChange }) {
 export default Editor;
 
 function getBorderSize(width, height, aspectRatio, additionalBorder) {
+  /*
+    gets the border size of one side only, not both
+  */
+
   const borderSize = getMinBorderSize(width, height, aspectRatio);
 
   // 1 additional border unit adds 10px to verticalBorder
   // borderSize.horizontalBorder += 10 * additionalBorder * aspectRatio
   // borderSize.verticalBorder += 10 * additionalBorder
-  
+
   // Additional Border goes up to 10, where the border's in the largest dimension take up half total space
   if (height > width) {
-    const additionalBorderUnit = ((height / 2 - borderSize.verticalBorder)) / 10;
     // additional border is relative to height
+    const additionalBorderUnit = (height / 2 - borderSize.verticalBorder) / 10;
+
     borderSize.verticalBorder += additionalBorder * additionalBorderUnit;
-    borderSize.horizontalBorder += borderSize.verticalBorder * aspectRatio
+    borderSize.horizontalBorder += borderSize.verticalBorder * aspectRatio;
   } else {
-    const additionalBorderUnit = ((width / 2 - borderSize.horizontalBorder)) / 10;
     // additional border is relative to width
+    const additionalBorderUnit = (width / 2 - borderSize.horizontalBorder) / 10;
+
     borderSize.horizontalBorder += additionalBorder * additionalBorderUnit;
-    borderSize.verticalBorder += borderSize.horizontalBorder / aspectRatio
+    borderSize.verticalBorder += borderSize.horizontalBorder / aspectRatio;
   }
 
   return borderSize;
@@ -118,6 +145,8 @@ function getMinBorderSize(width, height, aspectRatio) {
   /*
     Gets the minimum border size required 
     to get desired aspect ratio
+
+    gets the border size of one side only, not both
   */
 
   const originalAspectRatio = width / height;
@@ -133,21 +162,73 @@ function getMinBorderSize(width, height, aspectRatio) {
     // x = width / aspectRatio - height
 
     let extraHeight = width / aspectRatio - height;
-    let extraHeightPerSide = Math.ceil(extraHeight / 2); // ceil to guarantee aspect ratio is <= max allowed when rounded to int
+    let verticalBorder =  
+    extraHeight / 2; 
 
-    borderSize.verticalBorder = extraHeightPerSide;
+    borderSize.verticalBorder = verticalBorder;
   }
-
+  
   // need to add width/make it wider
   if (originalAspectRatio < aspectRatio) {
     // aspectRatio = (width + x) / height
     // x = aspectRatio * height - width
-
+    
     let extraWidth = aspectRatio * height - width;
-    let extraWidthPerSide = Math.ceil(extraWidth / 2); // ceil to guarantee aspect ratio is >= min allowed when rounded to int
-
-    borderSize.horizontalBorder = extraWidthPerSide;
+    let horizontalBorder = extraWidth / 2; 
+    console.log(`border ${extraWidth / 2}`)
+    
+    borderSize.horizontalBorder = horizontalBorder;
   }
 
   return borderSize;
+}
+
+function getScaledImageDimensionsCanvas(
+  width,
+  height,
+  aspectRatio,
+  additionalBorder
+) {
+  /*
+    See docs for equation details
+  */
+  const originalAspectRatio = width / height;
+
+  const newDimensions = {};
+
+  if (height > width) {
+    let totalHeightConstant;
+
+    if (originalAspectRatio > aspectRatio) {
+      const minBorderConstant = originalAspectRatio / aspectRatio - 1;
+      totalHeightConstant =
+        1 +
+        minBorderConstant +
+        additionalBorder * ((1 - minBorderConstant) / 10);
+    } else {
+      totalHeightConstant = 1 + additionalBorder / 10;
+    }
+
+    newDimensions.height =
+      Math.sqrt(MAX_CANVAS_AREA / aspectRatio) / totalHeightConstant;
+    newDimensions.width = newDimensions.height * originalAspectRatio;
+  } else {
+    let totalWidthConstant;
+
+    if (originalAspectRatio > aspectRatio) {
+      totalWidthConstant = 1 + additionalBorder / 10;
+    } else {
+      const minBorderConstant = aspectRatio / originalAspectRatio - 1;
+      totalWidthConstant =
+        1 +
+        minBorderConstant +
+        additionalBorder * ((1 - minBorderConstant) / 10);
+    }
+
+    newDimensions.width =
+      Math.sqrt(MAX_CANVAS_AREA * aspectRatio) / totalWidthConstant;
+    newDimensions.height = newDimensions.width / originalAspectRatio;
+  }
+
+  return newDimensions;
 }
