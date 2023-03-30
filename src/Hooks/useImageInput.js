@@ -8,7 +8,7 @@ function useImageInput() {
 
   // have to use effect since image loading is async and may set state when component unmounts or imageFile changes
   useEffect(() => {
-    if (!imageFile) return  // there's no file
+    if (!imageFile) return; // there's no file
 
     const newImage = new Image();
     newImage.src = URL.createObjectURL(imageFile);
@@ -48,8 +48,8 @@ function useImageInput() {
   return {
     image,
     onFileChange,
-    isLoading
-  }
+    isLoading,
+  };
 }
 
 export default useImageInput;

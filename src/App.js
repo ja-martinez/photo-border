@@ -10,13 +10,15 @@ import Editor from "./Components/Editor";
 import InitialPage from "./Components/InitialPage";
 
 function App() {
-  const {image, onFileChange, isLoading} = useImageInput();
-  
+  const { image, onFileChange, isLoading } = useImageInput();
+
   let content;
   if (!image) {
     content = <InitialPage onFileChange={onFileChange} isLoading={isLoading} />;
   } else {
-    content = <Editor image={image} onFileChange={onFileChange} key={image.src} />;
+    content = (
+      <Editor image={image} onFileChange={onFileChange} key={image.src} />
+    );
   }
 
   return <div className="App">{content}</div>;
