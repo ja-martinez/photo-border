@@ -11,7 +11,7 @@ can we check browser to only do canvas area limit on safari and iphone?
 */
 
 import { useState } from "react";
-import useCanvas from "../Hooks/useCanvas";
+import useCanvas from "../hooks/useCanvas";
 import ExportButton from "./ExportButton";
 import ImageInput from "./ImageInput";
 import ColorPicker from "./ColorPicker";

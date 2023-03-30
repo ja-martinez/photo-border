@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import isValidImage from "../Utils/isValidImage";
+import isValidImage from "../utils/isValidImage";
 
 function useImageInput() {
   const [imageFile, setImageFile] = useState();

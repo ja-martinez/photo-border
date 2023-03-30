@@ -4,10 +4,10 @@ put state in reducer
 add url as id to reset editor
 */
 
-import useImageInput from "./Hooks/useImageInput";
+import useImageInput from "./hooks/useImageInput";
 import "./App.css";
-import Editor from "./Components/Editor";
-import InitialPage from "./Components/InitialPage";
+import Editor from "./components/Editor";
+import InitialPage from "./components/InitialPage";
 
 function App() {
   const { image, onFileChange, isLoading } = useImageInput();

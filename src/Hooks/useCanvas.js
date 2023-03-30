@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
-import getBorderSize from "../Utils/getBorderSize";
+import getBorderSize from "../utils/getBorderSize";
 import getScaledImageDimensionsCanvas, {
   MAX_CANVAS_AREA,
-} from "../Utils/getScaledDimensionsCanvas";
+} from "../utils/getScaledDimensionsCanvas";
 
 function useCanvas(image, aspectRatio, additionalBorder, color) {
   const canvasRef = useRef(null);
