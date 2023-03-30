@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import isValidImage from "../Utils/isValidImage";
 
 function useImageInput() {
   const [imageFile, setImageFile] = useState();
@@ -53,13 +54,3 @@ function useImageInput() {
 }
 
 export default useImageInput;
-
-// Utilities
-
-function isValidImage(file) {
-  // may need to specify file types in future
-  if (file.type.startsWith("image/")) {
-    return true;
-  }
-  return false;
-}
