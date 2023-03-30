@@ -13,7 +13,7 @@ can we check browser to only do canvas area limit on safari and iphone?
 import { useState } from "react";
 import useCanvas from "../hooks/useCanvas";
 import ExportButton from "./ExportButton";
-import ImageInput from "./ImageInput";
+import ImportButton from "./ImportButton";
 import ColorPicker from "./ColorPicker";
 import AspectRatioInput from "./AspectRatioInput";
 import AdditionalBorderInput from "./AdditionalBorderInput";
@@ -54,7 +54,7 @@ function Editor({ image, onFileChange }) {
           setAdditionalBorder={setAdditionalBorder}
         />
         <ExportButton onExport={onExport} />
-        <ImageInput onFileChange={onFileChange}>Change Image</ImageInput>
+        <ImportButton onFileChange={onFileChange}>Change Image</ImportButton>
       </div>
     </div>
   );

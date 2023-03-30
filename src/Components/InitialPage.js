@@ -1,9 +1,9 @@
-import ImageInput from "./ImageInput";
+import ImportButton from "./ImportButton";
 
 function InitialPage({onFileChange, isLoading}) {
   return (
     <div className="initial-page">
-      <ImageInput onFileChange={onFileChange}>Import an image</ImageInput>
+      <ImportButton onFileChange={onFileChange}>Import image</ImportButton>
       {isLoading && <p>Loading Image...</p>}
     </div>
   )
