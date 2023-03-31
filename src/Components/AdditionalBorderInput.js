@@ -1,9 +1,9 @@
-import "./AdditionalBorderInput.css"
+import "./AdditionalBorderInput.css";
 
 function AdditionalBorderInput({ additionalBorder, setAdditionalBorder }) {
   return (
     <div id="additional-border-input">
-      <label htmlFor="additional-border">Additional Border</label>
+      {additionalBorder}
       <input
         name="additional-border"
         type="range"
@@ -13,7 +13,6 @@ function AdditionalBorderInput({ additionalBorder, setAdditionalBorder }) {
         value={additionalBorder}
         onInput={(e) => setAdditionalBorder(e.target.value)}
       />
-      {additionalBorder}
     </div>
   );
 }

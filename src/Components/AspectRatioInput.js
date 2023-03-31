@@ -1,9 +1,9 @@
-import './AspectRatioInput.css';
+import "./AspectRatioInput.css";
 
 function AspectRatioInput({ aspectRatio, setAspectRatio }) {
   return (
     <div id="aspect-ratio-input">
-      <label htmlFor="aspect-ratio">Aspect Ratio</label>
+      {convertDecimalToRatio(aspectRatio)}
       <input
         name="aspect-ratio"
         type="range"
@@ -13,7 +13,6 @@ function AspectRatioInput({ aspectRatio, setAspectRatio }) {
         value={aspectRatio}
         onInput={(e) => setAspectRatio(e.target.value)}
       />
-      {convertDecimalToRatio(aspectRatio)}
     </div>
   );
 }
@@ -22,9 +21,9 @@ export default AspectRatioInput;
 
 function convertDecimalToRatio(decimal) {
   const decimalNum = parseFloat(decimal);
-  
+
   switch (decimalNum) {
-    case .8:
+    case 0.8:
       return "4:5";
     case 1:
       return "1:1";
@@ -37,7 +36,7 @@ function convertDecimalToRatio(decimal) {
       return "5:4";
     case 1.33:
       return "4:3";
-    default:      
-      return `${decimal}:1`
+    default:
+      return `${decimal}:1`;
   }
 }

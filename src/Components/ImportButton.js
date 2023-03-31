@@ -13,7 +13,7 @@ function ImportButton({ onFileChange, children }) {
         ref={fileInputRef}
         onChange={onFileChange}
       />
-      <button onClick={() => fileInputRef.current.click()}>
+      <button type="button" onClick={() => fileInputRef.current.click()}>
         {children}
       </button>
     </>
