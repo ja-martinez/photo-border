@@ -1,12 +1,20 @@
+import "./ActionsSection.css";
+
 import WorkAreaSection from "./WorkAreaSection";
-import ExportButton from "./ExportButton";
+import Button from "./Button";
 import ImportButton from "./ImportButton";
 
 function ActionsSection({ onExport, onFileChange }) {
   return (
     <WorkAreaSection sectionTitle={"Actions"}>
-      <ExportButton onExport={onExport} />
-      <ImportButton onFileChange={onFileChange}>Change Image</ImportButton>
+      <div className="actions-content">
+        <Button className="primary-button export-button" onClick={onExport}>
+          Export
+        </Button>
+        <ImportButton className="secondary-button" onFileChange={onFileChange}>
+          Change Image
+        </ImportButton>
+      </div>
     </WorkAreaSection>
   );
 }

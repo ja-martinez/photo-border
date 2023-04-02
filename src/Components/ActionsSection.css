@@ -1,0 +1,11 @@
+.actions-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  width: max-content;
+}
+
+.actions-content > .export-button {
+  align-self: stretch;
+}

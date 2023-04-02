@@ -1,21 +1,26 @@
 import { useRef } from "react";
 
-function ImportButton({ onFileChange, children }) {
+import Button from "./Button";
+
+function ImportButton({ onFileChange, className, children }) {
   const fileInputRef = useRef(null);
-  
+
   return (
     <>
       <input
         type="file"
         name="image"
         accept="image/*"
-        style={{display: 'none'}}
+        style={{ display: "none" }}
         ref={fileInputRef}
         onChange={onFileChange}
       />
-      <button type="button" onClick={() => fileInputRef.current.click()}>
+      <Button
+        className={className}
+        onClick={() => fileInputRef.current.click()}
+      >
         {children}
-      </button>
+      </Button>
     </>
   );
 }

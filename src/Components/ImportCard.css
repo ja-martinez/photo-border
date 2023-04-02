@@ -38,10 +38,8 @@
 }
 
 .card > button {
-  box-sizing: border-box;
   color: white;
   background: black;
-  /* font-size: ; */
   font-weight: 600;
   padding: 0.8em 1.2em;
   border: none;
