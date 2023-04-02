@@ -1,5 +1,3 @@
-import "./AdditionalBorderInput.css";
-
 function AdditionalBorderInput({ additionalBorder, setAdditionalBorder }) {
   return (
     <div id="additional-border-input">

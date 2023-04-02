@@ -9,8 +9,6 @@ validate image type when loading image so that it is limited by browser, not app
 
 import useImageInput from "./hooks/useImageInput";
 
-import "./App.css";
-
 import MainScreen from "./components/MainScreen";
 import InitialScreen from "./components/InitialScreen";
 
@@ -19,14 +17,16 @@ function App() {
 
   let content;
   if (!image) {
-    content = <InitialScreen onFileChange={onFileChange} isLoading={isLoading} />;
+    content = (
+      <InitialScreen onFileChange={onFileChange} isLoading={isLoading} />
+    );
   } else {
     content = (
       <MainScreen image={image} onFileChange={onFileChange} key={image.src} />
     );
   }
 
-  return <div id="app">{content}</div>;
+  return <>{content}</>;
 }
 
 export default App;

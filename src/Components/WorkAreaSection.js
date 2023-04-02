@@ -1,3 +1,5 @@
+import "./WorkAreaSection.css";
+
 function WorkAreaSection({ sectionTitle, children }) {
   return (
     <div class="work-area-section">

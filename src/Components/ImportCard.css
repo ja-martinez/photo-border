@@ -1,0 +1,48 @@
+.card {
+  aspect-ratio: 1;
+  padding: 5% 3% 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 4%;
+
+  /* this prevents image from taking img's original width */
+  min-width: 0;
+
+  background: #eeeeee;
+  border: 4px solid;
+}
+
+/* square at 361x710 */
+@media (max-aspect-ratio: 361/710) {
+  .card {
+    width: 80%;
+  }
+}
+
+@media (min-aspect-ratio: 361/710) {
+  .card {
+    height: 80%;
+  }
+}
+
+.card-image {
+  align-self: stretch;
+  flex-grow: 1;
+  flex-basis: 0;
+  object-fit: contain;
+  
+  /* prevents it from having original height */
+  min-height: 0;
+}
+
+.card > button {
+  box-sizing: border-box;
+  color: white;
+  background: black;
+  /* font-size: ; */
+  font-weight: 600;
+  padding: 0.8em 1.2em;
+  border: none;
+}

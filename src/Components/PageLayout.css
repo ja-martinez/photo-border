@@ -1,0 +1,288 @@
+#app {
+  display: flex;
+  flex-direction: column;
+
+  /* The following add the border */
+  gap: var(--border-size);
+  background: black;
+  height: 100%;
+}
+
+#app > * {
+  background: white;
+}
+
+#title {
+  font-size: 3.6rem;
+  line-height: 4.2rem;
+  text-align: center;
+  font-family: "Work Sans";
+}
+
+#work-area {
+  flex-basis: 0;
+  flex-grow: 1;
+  min-height: 300px;
+  overflow: scroll;
+}
+
+.work-area-section {
+  padding: .5em .5em 1em .5em;
+}
+
+.work-area-section ~ .work-area-section {
+  border-top: black solid;
+}
+
+.work-area-section-content {
+  margin-top: .5em;
+  padding: 0 2.7em;
+}
+
+.slider-value {
+  text-align: center;
+  margin-bottom: .8rem;
+}
+
+
+/*
+=== Slider Thumb ===
+*/
+
+input[type=range] {
+  width: 100%;
+  overflow: hidden;
+}
+
+input[type="range"] {
+	--thumb-height: 24px;
+	--track-height: 4px;
+	--clip-edges: 4px;
+
+	--track-color: #ddd;
+  --progress-color: #000;
+  --thumb-color: #fff;
+}
+
+input[type="range"]:focus {
+	outline-color: #aaa;
+}
+
+/* === WebKit specific styles === */
+input[type="range"],
+input[type="range"]::-webkit-slider-runnable-track,
+input[type="range"]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	height: var(--thumb-height);
+}
+
+input[type="range"]::-webkit-slider-thumb {
+	--clip-top: calc((var(--thumb-height) - var(--track-height)) / 2);
+	--clip-bottom: calc(var(--thumb-height) - var(--clip-top));
+	--clip-further: calc(100% + 1px);
+	--box-fill: calc(-100vmax - var(--thumb-height)) 0 0 100vmax var(--progress-color);
+
+	width: var(--thumb-height);
+	background-color: var(--thumb-color);
+	box-shadow: var(--box-fill);
+	border-radius: var(--thumb-height);
+	border: 3px solid var(--progress-color);
+
+	clip-path: polygon(
+		100% -1px,
+		var(--clip-edges) -1px,
+		0 var(--clip-top),
+		-100vmax var(--clip-top),
+		-100vmax var(--clip-bottom),
+		0 var(--clip-bottom),
+		var(--clip-edges) 100%,
+		var(--clip-further) var(--clip-further)
+	);
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+	background: linear-gradient(var(--track-color) 0 0) scroll no-repeat center /
+		100% calc(var(--track-height) + 0px);
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+	cursor: grab;
+}
+input[type="range"]:active::-webkit-slider-thumb {
+	cursor: grabbing;
+}
+
+/* === Firefox specific styles === */
+input[type="range"],
+input[type="range"]::-moz-range-track,
+input[type="range"]::-moz-range-thumb {
+	appearance: none;
+	height: var(--thumb-height);
+}
+
+input[type="range"]::-moz-range-thumb {
+	background: var(--thumb-color);
+  box-sizing: border-box;
+	border: var(--progress-color) 3px solid;
+	width: var(--thumb-height);
+	border-radius: var(--thumb-height);
+}
+
+input[type="range"]::-moz-range-track {
+	background: var(--track-color);
+}
+
+input[type="range"]::-moz-range-progress {
+	appearance: none;
+	background: var(--progress-color);
+}
+
+input[type="range"]::-moz-range-track,
+input[type="range"]::-moz-range-progress {
+	height: var(--track-height);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+	cursor: grab;
+}
+input[type="range"]:active::-moz-range-thumb {
+	cursor: grabbing;
+}
+
+/* 
+=== End of slider styles ===
+*/
+
+/*
+=== Aspect Ratio Shortcuts styles ===
+*/
+
+.aspect-ratio-shortcuts-container {
+margin-top: .6em;
+
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+
+  background: black;
+  gap: 3px;
+  border: black 3px solid;
+}
+
+.aspect-ratio-shortcut {
+  padding: .4em .5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.aspect-ratio-icon {
+  display: inline;
+}
+
+#icon-4-5 {
+  width: .65em;
+}
+
+#icon-1-1 {
+  width: .698em;
+}
+
+#icon-3-2 {
+  width: .875em;
+}
+
+#icon-16-9 {
+  width: 1em;
+}
+
+button.aspect-ratio-shortcut:hover {
+  background-color: #eee;
+}
+
+button.aspect-ratio-shortcut:active {
+  filter: invert(100%);
+}
+
+/*
+=== aspect ratio shortcuts end ===
+*/
+
+#preview {
+  flex-grow: 7;
+  /* flex-basis: 0; */
+
+  /* this min-height prevents aspect-ratio from changing the minimum size
+  
+  source:
+  https://w3c.github.io/csswg-drafts/css-sizing-4/#aspect-ratio
+  */
+  min-height: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* TODO: adjust dot grid so that it never looks funky. */
+  background: linear-gradient(
+        90deg,
+        var(--bg-color) var(--dot-gutter),
+        transparent 0
+      ) center,
+    linear-gradient(
+      var(--bg-color) var(--dot-gutter), 
+      transparent 0
+      ) center,
+    var(--dot-color);
+  background-size: var(--dot-grid-size) var(--dot-grid-size);
+}
+
+
+
+
+
+/* 
+since the flex lines stretch equally, we need multiple queries to prevent the work-area/title section from getting too big. Will have to figure those out when I have the fluid text scaling and the content.
+*/
+
+@media (min-width: 840px) {
+  #app {
+    flex-wrap: wrap-reverse;
+  }
+
+  #preview {
+    order: 1;
+    flex-basis: 100%;
+    min-width: 50%;
+  }
+
+  #controls,
+  #title {
+    /* width: 410px; */
+    /* align-self: flex-start; */
+  }
+}
+
+/* @media (min-width: 1000) {
+  #preview {
+    min-width: 60%;
+  }
+} */
+
+/* 
+What I want to do:
+I want card to get smaller when I make viewport shorter
+*/
+
+/* #title {
+  background: seagreen;
+}
+
+#controls {
+  background: khaki;
+} */
+

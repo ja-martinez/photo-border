@@ -1,5 +1,7 @@
 import WorkAreaSection from "./WorkAreaSection";
 
+import "./AboutSection.css";
+
 function AboutSection() {
   return (
     <WorkAreaSection sectionTitle={"About"}>

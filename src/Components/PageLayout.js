@@ -4,6 +4,8 @@ Helps maintain consistency between the initial and main screens
 
 import AboutSection from "./AboutSection";
 
+import "./PageLayout.css";
+
 function PageLayout({ previewContent, workAreaContent }) {
   return (
     <div id="app">
