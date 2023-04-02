@@ -6,6 +6,8 @@ TODO:
 release canvas when opening another image
 */
 
+import "./MainScreen.css";
+
 import { useState } from "react";
 
 import useCanvas from "../hooks/useCanvas";

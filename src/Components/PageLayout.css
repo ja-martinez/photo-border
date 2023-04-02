@@ -214,7 +214,6 @@ button.aspect-ratio-shortcut:active {
 
 #preview {
   flex-grow: 7;
-  /* flex-basis: 0; */
 
   /* this min-height prevents aspect-ratio from changing the minimum size
   
