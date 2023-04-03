@@ -1,17 +1,17 @@
+import Slider from "./Slider";
+
 function AdditionalBorderInput({ additionalBorder, setAdditionalBorder }) {
   return (
-    <div id="additional-border-input">
-      {additionalBorder}
-      <input
-        name="additional-border"
-        type="range"
-        min="0"
-        max="10"
-        step="0.1"
+    <>
+      <Slider
         value={additionalBorder}
-        onInput={(e) => setAdditionalBorder(e.target.value)}
+        setValue={setAdditionalBorder}
+        min="0.8"
+        max="1.77"
+        step="0.01"
+        displayValue={additionalBorder}
       />
-    </div>
+    </>
   );
 }
 
