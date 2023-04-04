@@ -6,8 +6,8 @@ import ImportButton from "./ImportButton";
 function ImportCard({ onFileChange, isLoading }) {
   let buttonText = isLoading ? "Loading..." : "Import image";
   return (
-    <div class="card">
-      <img src={cardIllustration} alt="" class="card-image" />
+    <div className="card">
+      <img src={cardIllustration} alt="" className="card-image" />
       <ImportButton onFileChange={onFileChange}>{buttonText}</ImportButton>
     </div>
   );

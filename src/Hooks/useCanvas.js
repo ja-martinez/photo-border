@@ -3,7 +3,7 @@ import getFinalImageParameters from "../utils/getFinalImageParameters";
 
 function useCanvas(image, aspectRatio, additionalBorder, color) {
   const canvasRef = useRef(null);
-
+  
   const {
     totalWidth,
     totalHeight,
