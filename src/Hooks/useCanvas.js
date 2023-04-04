@@ -1,44 +1,22 @@
 import { useEffect, useRef } from "react";
-import getBorderSize from "../utils/getBorderSize";
-import getScaledImageDimensionsCanvas, {
-  MAX_CANVAS_AREA,
-} from "../utils/getScaledDimensionsCanvas";
+import getFinalImageParameters from "../utils/getFinalImageParameters";
 
 function useCanvas(image, aspectRatio, additionalBorder, color) {
   const canvasRef = useRef(null);
 
-  // get border and final size
-  let width = image.naturalWidth;
-  let height = image.naturalHeight;
-  let { horizontalBorder, verticalBorder } = getBorderSize(
-    width,
-    height,
+  const {
+    totalWidth,
+    totalHeight,
+    horizontalBorder,
+    verticalBorder,
+    imageWidth,
+    imageHeight,
+  } = getFinalImageParameters(
+    image.naturalWidth,
+    image.naturalHeight,
     aspectRatio,
     additionalBorder
   );
-  let finalWidth = width + horizontalBorder * 2;
-  let finalHeight = height + verticalBorder * 2;
-  console.log(finalWidth, finalHeight);
-
-  // check if canvas size will exceed safari limits (16,777,216 sq. px)
-  if (finalWidth * finalHeight > MAX_CANVAS_AREA) {
-    ({ width, height } = getScaledImageDimensionsCanvas(
-      width,
-      height,
-      aspectRatio,
-      additionalBorder
-    ));
-
-    ({ horizontalBorder, verticalBorder } = getBorderSize(
-      width,
-      height,
-      aspectRatio,
-      additionalBorder
-    ));
-
-    finalWidth = width + horizontalBorder * 2;
-    finalHeight = height + verticalBorder * 2;
-  }
 
   // put border image on canvas
   useEffect(() => {
@@ -50,8 +28,14 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // add image to canvas
-    ctx.drawImage(image, horizontalBorder, verticalBorder, width, height);
-  }, [image, horizontalBorder, verticalBorder, color, width, height]);
+    ctx.drawImage(
+      image,
+      horizontalBorder,
+      verticalBorder,
+      imageWidth,
+      imageHeight
+    );
+  }, [image, horizontalBorder, verticalBorder, color, imageWidth, imageHeight]);
 
   function onExport() {
     const url = canvasRef.current.toDataURL("image/jpeg", 1.0);
@@ -64,8 +48,8 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
   }
 
   return {
-    finalWidth,
-    finalHeight,
+    totalWidth,
+    totalHeight,
     onExport,
     canvasRef,
   };

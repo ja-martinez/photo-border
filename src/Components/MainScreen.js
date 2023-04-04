@@ -25,7 +25,7 @@ function MainScreen({ image, onFileChange }) {
   const [additionalBorder, setAdditionalBorder] = useState(0);
   const [color, setColor] = useState(INITIAL_COLOR);
 
-  const { finalWidth, finalHeight, onExport, canvasRef } = useCanvas(
+  const { totalWidth, totalHeight, onExport, canvasRef } = useCanvas(
     image,
     aspectRatio,
     additionalBorder,
@@ -37,8 +37,8 @@ function MainScreen({ image, onFileChange }) {
       previewContent={
         <canvas
           id="canvas"
-          width={finalWidth}
-          height={finalHeight}
+          width={totalWidth}
+          height={totalHeight}
           ref={canvasRef}
         ></canvas>
       }
