@@ -1,0 +1,38 @@
+.aspect-ratio-shortcut {
+  padding: 0.4em 0.5em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.aspect-ratio-icon {
+  display: inline;
+}
+
+#icon-4-5 {
+  width: 0.65em;
+}
+
+#icon-1-1 {
+  width: 0.698em;
+}
+
+#icon-3-2 {
+  width: 0.875em;
+}
+
+#icon-16-9 {
+  width: 1em;
+}
+
+button.aspect-ratio-shortcut:hover {
+  background-color: #eee;
+}
+
+button.aspect-ratio-shortcut:active {
+  filter: invert(100%);
+}

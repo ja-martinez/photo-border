@@ -3,6 +3,7 @@ import "./AspectRatioInput.css";
 import convertDecimalToRatio from "../utils/convertDecimalToRatio";
 
 import Slider from "./Slider";
+import AspectRatioShortcuts from "./AspectRatioShortcuts";
 
 function AspectRatioInput({ aspectRatio, setAspectRatio }) {
   return (
@@ -15,6 +16,7 @@ function AspectRatioInput({ aspectRatio, setAspectRatio }) {
         step="0.01"
         displayValue={convertDecimalToRatio(aspectRatio)}
       />
+      <AspectRatioShortcuts setAspectRatio={setAspectRatio} />
     </>
   );
 }
