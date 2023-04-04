@@ -1,12 +1,16 @@
 import WorkAreaSection from "./WorkAreaSection";
-import AdditionalBorderInput from "./AdditionalBorderInput";
+import Slider from "./Slider";
 
 function BorderThicknessSection({ additionalBorder, setAdditionalBorder }) {
   return (
     <WorkAreaSection sectionTitle={"Thickness"}>
-      <AdditionalBorderInput
-        additionalBorder={additionalBorder}
-        setAdditionalBorder={setAdditionalBorder}
+      <Slider
+        value={additionalBorder}
+        setValue={setAdditionalBorder}
+        min="0.8"
+        max="1.77"
+        step="0.01"
+        displayValue={additionalBorder}
       />
     </WorkAreaSection>
   );
