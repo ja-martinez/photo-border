@@ -7,9 +7,9 @@ function BorderThicknessSection({ additionalBorder, setAdditionalBorder }) {
       <Slider
         value={additionalBorder}
         setValue={setAdditionalBorder}
-        min="0.8"
-        max="1.77"
-        step="0.01"
+        min="0"
+        max="10"
+        step="0.1"
         displayValue={additionalBorder}
       />
     </WorkAreaSection>
