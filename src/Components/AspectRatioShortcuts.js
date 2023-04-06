@@ -32,7 +32,7 @@ const shortcutsList = [
 
 function AspectRatioShortcuts({ setAspectRatio }) {
   return (
-    <div class="aspect-ratio-shortcuts-container">
+    <div className="aspect-ratio-shortcuts-container">
       {shortcutsList.map((shortcut) => (
         <AspectRatioShortcutsButton
           key={shortcut.ratio}
