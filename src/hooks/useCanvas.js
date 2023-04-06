@@ -1,9 +1,9 @@
 import { useEffect, useRef } from "react";
-import getFinalImageParameters from "../utils/getFinalImageParameters";
+import getFinalImageParameters from "../Utils/getFinalImageParameters";
 
 function useCanvas(image, aspectRatio, additionalBorder, color) {
   const canvasRef = useRef(null);
-  
+
   const {
     totalWidth,
     totalHeight,
