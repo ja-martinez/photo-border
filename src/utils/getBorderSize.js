@@ -29,6 +29,9 @@ export default function getBorderSize(
     borderSize.verticalBorder += borderSize.horizontalBorder / aspectRatio;
   }
 
+  borderSize.horizontalBorder = Math.floor(borderSize.horizontalBorder);
+  borderSize.verticalBorder = Math.floor(borderSize.verticalBorder);
+
   return borderSize;
 }
 

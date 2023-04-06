@@ -47,5 +47,8 @@ export default function getScaledImageDimensionsCanvas(
     newDimensions.height = newDimensions.width / originalAspectRatio;
   }
 
+  newDimensions.width = Math.floor(newDimensions.width);
+  newDimensions.height = Math.floor(newDimensions.height);
+
   return newDimensions;
 }
