@@ -20,7 +20,7 @@ const shortcutsList = [
   },
   {
     ratio: "3:2",
-    value: 1.33,
+    value: 1.5,
     iconSrc: icon3_2,
   },
   {
