@@ -20,7 +20,6 @@ export default function getFinalImageParameters(
   );
   let totalWidth = imageWidth + horizontalBorder * 2;
   let totalHeight = imageHeight + verticalBorder * 2;
-  console.log(totalWidth, totalHeight);
 
   // check if canvas size will exceed safari limits (16,777,216 sq. px)
   if (totalWidth * totalHeight > MAX_CANVAS_AREA) {

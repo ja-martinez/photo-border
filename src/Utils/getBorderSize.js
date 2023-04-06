@@ -65,7 +65,6 @@ function getMinBorderSize(width, height, aspectRatio) {
 
     let extraWidth = aspectRatio * height - width;
     let horizontalBorder = extraWidth / 2;
-    console.log(`border ${extraWidth / 2}`);
 
     borderSize.horizontalBorder = horizontalBorder;
   }
