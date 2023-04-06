@@ -25,7 +25,7 @@ function MainScreen({ image, onFileChange }) {
   const [additionalBorder, setAdditionalBorder] = useState(0);
   const [color, setColor] = useState(INITIAL_COLOR);
 
-  const { totalWidth, totalHeight, onExport, canvasRef } = useCanvas(
+  const { onExport, canvasRef } = useCanvas(
     image,
     aspectRatio,
     additionalBorder,
@@ -34,14 +34,7 @@ function MainScreen({ image, onFileChange }) {
 
   return (
     <PageLayout
-      previewContent={
-        <canvas
-          id="canvas"
-          width={totalWidth}
-          height={totalHeight}
-          ref={canvasRef}
-        ></canvas>
-      }
+      previewContent={<canvas id="canvas" ref={canvasRef}></canvas>}
       workAreaContent={
         <>
           <AspectRatioSection

@@ -23,7 +23,11 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d", { alpha: false });
 
-    // fill canvas with color
+    // resize canvas
+    canvas.width = totalWidth;
+    canvas.height = totalHeight;
+
+    // fill canvas with border color
     ctx.fillStyle = color;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -35,7 +39,16 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
       imageWidth,
       imageHeight
     );
-  }, [image, horizontalBorder, verticalBorder, color, imageWidth, imageHeight]);
+  }, [
+    image,
+    horizontalBorder,
+    verticalBorder,
+    color,
+    imageWidth,
+    imageHeight,
+    totalWidth,
+    totalHeight,
+  ]);
 
   function onExport() {
     const url = canvasRef.current.toDataURL("image/jpeg", 1.0);
@@ -48,8 +61,6 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
   }
 
   return {
-    totalWidth,
-    totalHeight,
     onExport,
     canvasRef,
   };
