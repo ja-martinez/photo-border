@@ -4,22 +4,21 @@ import getFinalImageParameters from "../utils/getFinalImageParameters";
 function useCanvas(image, aspectRatio, additionalBorder, color) {
   const canvasRef = useRef(null);
 
-  const {
-    totalWidth,
-    totalHeight,
-    horizontalBorder,
-    verticalBorder,
-    imageWidth,
-    imageHeight,
-  } = getFinalImageParameters(
-    image.naturalWidth,
-    image.naturalHeight,
-    aspectRatio,
-    additionalBorder
-  );
-
   // put border image on canvas
   useEffect(() => {
+    const {
+      totalWidth,
+      totalHeight,
+      horizontalBorder,
+      verticalBorder,
+      imageWidth,
+      imageHeight,
+    } = getFinalImageParameters(
+      image.naturalWidth,
+      image.naturalHeight,
+      aspectRatio,
+      additionalBorder
+    );
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d", { alpha: false });
 
@@ -39,16 +38,9 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
       imageWidth,
       imageHeight
     );
-  }, [
-    image,
-    horizontalBorder,
-    verticalBorder,
-    color,
-    imageWidth,
-    imageHeight,
-    totalWidth,
-    totalHeight,
-  ]);
+
+    console.log("effect finished running");
+  }, [image, color, additionalBorder, aspectRatio]);
 
   function onExport() {
     const url = canvasRef.current.toDataURL("image/jpeg", 1.0);
