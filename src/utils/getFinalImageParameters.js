@@ -1,7 +1,10 @@
-import getBorderSize from "./getBorderSize";
+import getBorderSize from "./getBorderSize.js";
 import getScaledImageDimensionsCanvas, {
-  MAX_CANVAS_AREA,
-} from "./getScaledDimensionsCanvas";
+  MAX_CANVAS_AREA_SAFE,
+} from "./getScaledDimensionsCanvas.js";
+
+export const MIN_ASPECT_RATIO = 0.8;
+export const MAX_ASPECT_RATIO = 1.77;
 
 export default function getFinalImageParameters(
   originalImageWidth,
@@ -22,7 +25,7 @@ export default function getFinalImageParameters(
   let totalHeight = imageHeight + verticalBorder * 2;
 
   // check if canvas size will exceed safari limits (16,777,216 sq. px)
-  if (totalWidth * totalHeight > MAX_CANVAS_AREA) {
+  if (totalWidth * totalHeight > MAX_CANVAS_AREA_SAFE) {
     ({ width: imageWidth, height: imageHeight } =
       getScaledImageDimensionsCanvas(
         imageWidth,
@@ -40,6 +43,30 @@ export default function getFinalImageParameters(
 
     totalWidth = imageWidth + horizontalBorder * 2;
     totalHeight = imageHeight + verticalBorder * 2;
+  }
+
+  /*
+    Rounding
+  */
+  horizontalBorder = Math.floor(horizontalBorder);
+  verticalBorder = Math.floor(verticalBorder);
+
+  totalWidth = imageWidth + horizontalBorder * 2;
+  totalHeight = imageHeight + verticalBorder * 2;
+  let resultingAspectRatio = totalWidth / totalHeight;
+
+  while (resultingAspectRatio < MIN_ASPECT_RATIO) {
+    horizontalBorder += 1;
+    totalWidth = imageWidth + horizontalBorder * 2;
+    totalHeight = imageHeight + verticalBorder * 2;
+    resultingAspectRatio = totalWidth / totalHeight;
+  }
+
+  while (resultingAspectRatio > MAX_ASPECT_RATIO) {
+    verticalBorder += 1;
+    totalWidth = imageWidth + horizontalBorder * 2;
+    totalHeight = imageHeight + verticalBorder * 2;
+    resultingAspectRatio = totalWidth / totalHeight;
   }
 
   return {

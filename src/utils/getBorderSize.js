@@ -1,3 +1,14 @@
+/*
+  TODO:
+  Write tests for these functions
+  make error object
+*/
+
+import {
+  MIN_ASPECT_RATIO,
+  MAX_ASPECT_RATIO,
+} from "./getFinalImageParameters.js";
+
 export default function getBorderSize(
   width,
   height,
@@ -5,10 +16,20 @@ export default function getBorderSize(
   additionalBorder
 ) {
   /*
-    gets the border size of one side only, not both
+    gets half the total border size (e.g. left/border)
   */
 
+  if (aspectRatio < MIN_ASPECT_RATIO || aspectRatio > MAX_ASPECT_RATIO) {
+    throw Error(
+      `Invalid aspect ratio. Aspect ratio should be in [${MIN_ASPECT_RATIO}, ${MAX_ASPECT_RATIO}]`
+    );
+  }
+
   const borderSize = getMinBorderSize(width, height, aspectRatio);
+
+  /*
+    Calculate additional border
+  */
 
   // 1 additional border unit adds 10px to verticalBorder
   // borderSize.horizontalBorder += 10 * additionalBorder * aspectRatio
@@ -18,19 +39,19 @@ export default function getBorderSize(
   if (height > width) {
     // additional border is relative to height
     const additionalBorderUnit = (height / 2 - borderSize.verticalBorder) / 10;
+    const additionalVerticalBorder = additionalBorder * additionalBorderUnit;
 
-    borderSize.verticalBorder += additionalBorder * additionalBorderUnit;
-    borderSize.horizontalBorder += borderSize.verticalBorder * aspectRatio;
+    borderSize.verticalBorder += additionalVerticalBorder;
+    borderSize.horizontalBorder += additionalVerticalBorder * aspectRatio;
   } else {
+    // height <= width
     // additional border is relative to width
     const additionalBorderUnit = (width / 2 - borderSize.horizontalBorder) / 10;
+    const additionalHorizontalBorder = additionalBorder * additionalBorderUnit;
 
-    borderSize.horizontalBorder += additionalBorder * additionalBorderUnit;
-    borderSize.verticalBorder += borderSize.horizontalBorder / aspectRatio;
+    borderSize.horizontalBorder += additionalHorizontalBorder;
+    borderSize.verticalBorder += additionalHorizontalBorder / aspectRatio;
   }
-
-  borderSize.horizontalBorder = Math.floor(borderSize.horizontalBorder);
-  borderSize.verticalBorder = Math.floor(borderSize.verticalBorder);
 
   return borderSize;
 }
@@ -40,8 +61,14 @@ function getMinBorderSize(width, height, aspectRatio) {
     Gets the minimum border size required 
     to get desired aspect ratio
 
-    gets the border size of one side only, not both
+    gets half the total border size (e.g. left/border)
   */
+
+  if (aspectRatio < MIN_ASPECT_RATIO || aspectRatio > MAX_ASPECT_RATIO) {
+    throw Error(
+      `Invalid aspect ratio. Aspect ratio should be in [${MIN_ASPECT_RATIO}, ${MAX_ASPECT_RATIO}]`
+    );
+  }
 
   const originalAspectRatio = width / height;
 
