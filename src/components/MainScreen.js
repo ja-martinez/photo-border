@@ -11,6 +11,7 @@ import "./MainScreen.css";
 import { useState } from "react";
 
 import useCanvas from "../hooks/useCanvas";
+import useScaledPreviewImage from "../hooks/useScaledPreviewImage";
 
 import PageLayout from "./PageLayout";
 import BorderThicknessSection from "./BorderThicknessSection";
@@ -25,8 +26,10 @@ function MainScreen({ image, onFileChange }) {
   const [additionalBorder, setAdditionalBorder] = useState(0);
   const [color, setColor] = useState(INITIAL_COLOR);
 
+  const scaledImageCanvas = useScaledPreviewImage(image);
+
   const { onExport, canvasRef } = useCanvas(
-    image,
+    scaledImageCanvas,
     aspectRatio,
     additionalBorder,
     color

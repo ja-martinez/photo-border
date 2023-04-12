@@ -6,20 +6,6 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
 
   // put border image on canvas
   useEffect(() => {
-    console.log("inside the canvas drawing effect")
-    if (!image) return;
-
-    let originalImageWidth;
-    let originalImageHeight;
-
-    if (image instanceof HTMLImageElement) {
-      originalImageWidth = image.naturalWidth;
-      originalImageHeight = image.naturalHeight;
-    } else {
-      originalImageWidth = image.width;
-      originalImageHeight = image.height;
-    }
-
     const {
       totalWidth,
       totalHeight,
@@ -28,8 +14,8 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
       imageWidth,
       imageHeight,
     } = getFinalImageParameters(
-      originalImageWidth,
-      originalImageHeight,
+      image.naturalWidth,
+      image.naturalHeight,
       aspectRatio,
       additionalBorder
     );

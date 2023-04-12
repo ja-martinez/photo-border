@@ -1,14 +1,14 @@
-function throttle(cb, coolDown) {
+function throttle(func, coolDown) {
   let wait = false;
   let mostRecentArgs = null;
 
-  function checkMostRecentArgs() {
+  function timeoutCB() {
     if (mostRecentArgs == null) {
       wait = false;
     } else {
-      cb(...mostRecentArgs);
+      func.apply(this, mostRecentArgs);
       mostRecentArgs = null;
-      setTimeout(checkMostRecentArgs, coolDown);
+      setTimeout(timeoutCB, coolDown);
     }
   }
 
@@ -18,9 +18,9 @@ function throttle(cb, coolDown) {
       return;
     }
 
-    cb(...args);
+    func.apply(this, args);
     wait = true;
-    setTimeout(checkMostRecentArgs, coolDown);
+    setTimeout(timeoutCB, coolDown);
   };
 }
 
