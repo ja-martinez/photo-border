@@ -9,7 +9,6 @@ function useScaledPreviewImage(image) {
   // console.log(`The dimensions are ${previewDimensions.width} x ${previewDimensions.height}`);
 
   useEffect(() => {
-    console.log("inside the resize listener effect");
     function onResize() {
       setPreviewDimensions(getPreviewDimensions());
     }
@@ -22,7 +21,6 @@ function useScaledPreviewImage(image) {
   }, []);
 
   useEffect(() => {
-    console.log("inside the image scaling effect");
     const imageCanvas = document.createElement("canvas");
     const ctx = imageCanvas.getContext("2d", { alpha: false });
 
@@ -34,10 +32,10 @@ function useScaledPreviewImage(image) {
     const oHeight = image.naturalHeight;
 
     // get factor that would fit image in preview element
-    const scaleFactor = Math.min(
-      previewWidth / oWidth,
-      previewHeight / oHeight
-    );
+    // multiply pixel ratio to prevent pixelating due to difference between physical and CSS pixels.
+    const scaleFactor =
+      Math.min(previewWidth / oWidth, previewHeight / oHeight) *
+      window.devicePixelRatio;
 
     // image doesn't need to be scaled down
     if (scaleFactor >= 1) return;

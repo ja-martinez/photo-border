@@ -6,7 +6,6 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
 
   // put border image on canvas
   useEffect(() => {
-    console.log("inside the canvas drawing effect")
     if (!image) return;
 
     let originalImageWidth;
