@@ -6,8 +6,6 @@ function useScaledPreviewImage(image) {
   const [previewDimensions, setPreviewDimensions] =
     useState(getPreviewDimensions);
 
-  // console.log(`The dimensions are ${previewDimensions.width} x ${previewDimensions.height}`);
-
   useEffect(() => {
     function onResize() {
       setPreviewDimensions(getPreviewDimensions());
@@ -24,9 +22,7 @@ function useScaledPreviewImage(image) {
     const imageCanvas = document.createElement("canvas");
     const ctx = imageCanvas.getContext("2d", { alpha: false });
 
-    const preview = document.getElementById("preview");
-    const previewWidth = preview.offsetWidth;
-    const previewHeight = preview.offsetHeight;
+    const {width: previewWidth, height: previewHeight} = previewDimensions;
 
     const oWidth = image.naturalWidth;
     const oHeight = image.naturalHeight;
@@ -59,8 +55,10 @@ function useScaledPreviewImage(image) {
 export default useScaledPreviewImage;
 
 function getPreviewDimensions() {
+  const preview = document.getElementById("preview");
+
   return {
-    width: document.getElementById("preview").offsetWidth,
-    height: document.getElementById("preview").offsetHeight,
+    width: preview.offsetWidth,
+    height: preview.offsetHeight,
   };
 }
