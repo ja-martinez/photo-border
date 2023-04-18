@@ -27,6 +27,12 @@
   }
 }
 
+@media (orientation: landscape) and (min-width: 840px) {
+  .card {
+    height: 50%;
+  }
+}
+
 .card-image {
   align-self: stretch;
   flex-grow: 1;
@@ -45,10 +51,4 @@
   font-weight: 600;
   padding: 0.8em 1.2em;
   border: none;
-}
-
-@media (orientation: landscape) {
-  .card {
-    height: 50%;
-  }
 }
