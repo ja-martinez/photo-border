@@ -31,10 +31,12 @@
   align-self: stretch;
   flex-grow: 1;
   flex-basis: 0;
-  object-fit: contain;
+  object-fit: scale-down;
   
   /* prevents it from having original height */
+  /* TODO: Do I need all the min-heights? */
   min-height: 0;
+  height: 0;
 }
 
 .card > button {
@@ -43,4 +45,10 @@
   font-weight: 600;
   padding: 0.8em 1.2em;
   border: none;
+}
+
+@media (orientation: landscape) {
+  .card {
+    height: 50%;
+  }
 }

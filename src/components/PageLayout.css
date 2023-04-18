@@ -1,10 +1,12 @@
 #app {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: min-content 7fr minmax(300px, 1fr);
+  grid-template-columns: 1fr;
 
   /* The following add the border */
   gap: var(--border-size);
   background: black;
+
   height: 100%;
 }
 
@@ -20,9 +22,6 @@
 }
 
 #work-area {
-  flex-basis: 0;
-  flex-grow: 1;
-  min-height: 300px;
   overflow: scroll;
 }
 
@@ -44,8 +43,6 @@
 }
 
 #preview {
-  flex-grow: 7;
-
   /* this min-height prevents aspect-ratio from changing the minimum size
   
   source:
@@ -73,7 +70,7 @@
 since the flex lines stretch equally, we need multiple queries to prevent the work-area/title section from getting too big. Will have to figure those out when I have the fluid text scaling and the content.
 */
 
-@media (min-width: 840px) {
+/* @media (min-width: 840px) {
   #app {
     flex-wrap: wrap-reverse;
   }
@@ -86,10 +83,10 @@ since the flex lines stretch equally, we need multiple queries to prevent the wo
 
   #controls,
   #title {
-    /* width: 410px; */
-    /* align-self: flex-start; */
+    width: 410px;
+    align-self: flex-start;
   }
-}
+} */
 
 /* @media (min-width: 1000) {
   #preview {
@@ -97,15 +94,33 @@ since the flex lines stretch equally, we need multiple queries to prevent the wo
   }
 } */
 
-/* 
-What I want to do:
-I want card to get smaller when I make viewport shorter
-*/
+@media (orientation: landscape) {
+  #app {
+    grid-template-columns: 3fr minmax(300px, 2fr);
+    grid-template-rows: min-content 1fr;
+  }
 
-/* #title {
-  background: seagreen;
+  #title {
+    grid-column: 2;
+  }
+
+  #preview {
+    grid-row: 1 / -1;
+  }
+
+  /* Add side borders to phones and tablets */
+  @media (pointer: none), (pointer: coarse) {
+    #app {
+      padding: 0 var(--border-size) 0;
+    }
+  }
 }
 
-#controls {
-  background: khaki;
-} */
+@supports (padding: max(0px)) {
+  body,
+  header,
+  footer {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
