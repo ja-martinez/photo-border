@@ -6,7 +6,7 @@ canvas {
 }
 
 @media (orientation: landscape) {
-  @media (min-width: 840px) {
+  @media (min-height: 450px) {
     canvas {
       /* prevent canvas from taking all available space */
       width: 80%;
