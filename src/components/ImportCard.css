@@ -27,7 +27,7 @@
   }
 }
 
-@media (orientation: landscape) and (min-width: 840px) {
+@media (orientation: landscape) and (min-height: 450px) {
   .card {
     height: 50%;
   }
