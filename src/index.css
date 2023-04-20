@@ -45,3 +45,9 @@ b {
   color: white;
   background-color: #000;
 }
+
+@media (orientation: landscape) and (max-height: 450px) {
+  :root {
+    font-size: 58.5%;
+  }
+}
