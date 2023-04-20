@@ -1,18 +1,16 @@
 .button-base {
-  color: white;
-  background: black;
   font-weight: 600;
   padding: 0.8em 1.2em;
-  border: 3px solid black;
+  border: 3px solid var(--primary-color);
   white-space: nowrap;
 }
 
 .primary-button {
-  color: white;
-  background: black;
+  background: var(--primary-color);
+  color: var(--on-primary-color);
 }
 
 .secondary-button {
-  color: black;
-  background: white;
+  background: var(--secondary-color);
+  color: var(--on-secondary-color);
 }

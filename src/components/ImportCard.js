@@ -8,7 +8,7 @@ function ImportCard({ onFileChange, isLoading }) {
   return (
     <div className="card">
       <img src={cardIllustration} alt="" className="card-image" />
-      <ImportButton onFileChange={onFileChange}>{buttonText}</ImportButton>
+      <ImportButton variant="primary" onFileChange={onFileChange}>{buttonText}</ImportButton>
     </div>
   );
 }

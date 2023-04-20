@@ -10,7 +10,7 @@
   /* this prevents image from taking img's original width */
   min-width: 0;
 
-  background: #eeeeee;
+  background: var(--surface-color);
   border: 4px solid;
 }
 
@@ -46,9 +46,5 @@
 }
 
 .card > button {
-  color: white;
-  background: black;
-  font-weight: 600;
-  padding: 0.8em 1.2em;
   border: none;
 }

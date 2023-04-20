@@ -3,7 +3,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: var(--secondary-color);
 
   font-size: 1.5rem;
   font-weight: 600;

@@ -18,8 +18,8 @@ input[type="range"] {
   --clip-edges: 4px;
 
   --track-color: #ddd;
-  --progress-color: #000;
-  --thumb-color: #fff;
+  --progress-color: var(--primary-color);
+  --thumb-color: var(--on-primary-color);
 }
 
 input[type="range"]:focus {

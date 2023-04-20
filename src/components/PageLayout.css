@@ -2,19 +2,25 @@
   display: grid;
   grid-template-rows: min-content 7fr minmax(300px, 1fr);
   grid-template-columns: 1fr;
+  grid-template-areas:
+    "title"
+    "preview"
+    "work-area";
 
   /* The following add the border */
   gap: var(--border-size);
-  background: black;
+  background: var(--primary-color);
 
   height: 100%;
 }
 
 #app > * {
-  background: white;
+  background: var(--background-color);
 }
 
 #title {
+  grid-area: title;
+
   font-size: 3.6rem;
   line-height: 4.2rem;
   text-align: center;
@@ -22,6 +28,8 @@
 }
 
 #work-area {
+  grid-area: work-area;
+
   overflow: scroll;
 }
 
@@ -30,7 +38,7 @@
 }
 
 .work-area-section ~ .work-area-section {
-  border-top: black solid;
+  border-top: var(--primary-color) solid;
 }
 
 .work-area-section-content {
@@ -42,7 +50,9 @@
   margin: auto;
 }
 
-#preview {
+#app > #preview {
+  grid-area: preview;
+
   /* this min-height prevents aspect-ratio from changing the minimum size
   
   source:
@@ -57,12 +67,12 @@
   /* TODO: adjust dot grid so that it never looks funky. */
   background: linear-gradient(
         90deg,
-        var(--bg-color) var(--dot-gutter),
+        var(--background-color) var(--dot-gutter),
         transparent 0
       )
       center,
-    linear-gradient(var(--bg-color) var(--dot-gutter), transparent 0) center,
-    var(--dot-color);
+    linear-gradient(var(--background-color) var(--dot-gutter), transparent 0) center,
+    var(--on-background-color);
   background-size: var(--dot-grid-size) var(--dot-grid-size);
 }
 
@@ -98,14 +108,9 @@ since the flex lines stretch equally, we need multiple queries to prevent the wo
   #app {
     grid-template-columns: 3fr minmax(340px, 2fr);
     grid-template-rows: min-content 1fr;
-  }
-
-  #title {
-    grid-column: 2;
-  }
-
-  #preview {
-    grid-row: 1 / -1;
+    grid-template-areas: 
+    "preview title"
+    "preview work-area";
   }
 
   /* Add side borders to phones and tablets */

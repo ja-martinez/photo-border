@@ -6,6 +6,8 @@
   width: max-content;
 }
 
+/* TODO: refactor this */
+/* "export" button is shorter than "change image" and this stretches it to "change image" size */
 .actions-content > .export-button {
   align-self: stretch;
 }

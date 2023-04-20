@@ -8,10 +8,10 @@ function ActionsSection({ onExport, onFileChange }) {
   return (
     <WorkAreaSection sectionTitle={"Actions"}>
       <div className="actions-content">
-        <Button className="primary-button export-button" onClick={onExport}>
+        <Button variant="primary" className="export-button" onClick={onExport}>
           Export
         </Button>
-        <ImportButton className="secondary-button" onFileChange={onFileChange}>
+        <ImportButton variant="secondary" onFileChange={onFileChange}>
           Change Image
         </ImportButton>
       </div>

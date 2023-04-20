@@ -2,7 +2,7 @@ import { useRef } from "react";
 
 import Button from "./Button";
 
-function ImportButton({ onFileChange, className, children }) {
+function ImportButton({ onFileChange, variant, className, children }) {
   const fileInputRef = useRef(null);
 
   return (
@@ -16,6 +16,7 @@ function ImportButton({ onFileChange, className, children }) {
         onChange={onFileChange}
       />
       <Button
+        variant={variant}
         className={className}
         onClick={() => fileInputRef.current.click()}
       >

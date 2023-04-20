@@ -5,7 +5,9 @@
   width: 100%;
   grid-template-columns: repeat(4, 1fr);
 
-  background: black;
+  /* border between shortcut buttons */
+  background: var(--primary-color);
   gap: 3px;
-  border: black 3px solid;
+
+  border: var(--primary-color) 3px solid;
 }

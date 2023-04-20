@@ -6,13 +6,22 @@
 :root {
   font-size: 62.5%;
 
+
+  --border-size: 3px;
+
+  --primary-color: black;
+  --secondary-color: white;
+  --background-color: white;
+  --surface-color: #eeeeee;
+  --on-background-color: black;
+  --on-primary-color: white;
+  --on-secondary-color: black;
+
   --dot-diameter: 3px;
   --dot-gutter: 23px;
   --dot-grid-size: calc(var(--dot-gutter) + var(--dot-diameter));
   --dot-color: black;
   --bg-color: white;
-
-  --border-size: 3px;
 }
 
 #root {
@@ -22,6 +31,7 @@
 body {
   font-family: "Poppins";
   font-size: 1.6rem;
+  color: var(--on-background-color);
 }
 
 h2 {
@@ -42,8 +52,8 @@ b {
 }
 
 *::selection {
-  color: white;
-  background-color: #000;
+  color: var(--on-primary-color);
+  background-color: var(--primary-color);
 }
 
 @media (orientation: landscape) and (max-height: 450px) {
