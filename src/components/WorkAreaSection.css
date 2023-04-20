@@ -1,0 +1,16 @@
+.work-area-section {
+  padding: 0.5em 0.5em 1em 0.5em;
+}
+
+.work-area-section ~ .work-area-section {
+  border-top: var(--primary-color) solid;
+}
+
+.work-area-section-content {
+  margin-top: 0.5em;
+  padding: 0 2.7em;
+}
+
+.work-area-section-content > * {
+  margin: auto;
+}

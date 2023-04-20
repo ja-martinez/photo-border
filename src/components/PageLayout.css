@@ -33,23 +33,6 @@
   overflow: scroll;
 }
 
-.work-area-section {
-  padding: 0.5em 0.5em 1em 0.5em;
-}
-
-.work-area-section ~ .work-area-section {
-  border-top: var(--primary-color) solid;
-}
-
-.work-area-section-content {
-  margin-top: 0.5em;
-  padding: 0 2.7em;
-}
-
-.work-area-section-content > * {
-  margin: auto;
-}
-
 #app > #preview {
   grid-area: preview;
 
@@ -71,7 +54,8 @@
         transparent 0
       )
       center,
-    linear-gradient(var(--background-color) var(--dot-gutter), transparent 0) center,
+    linear-gradient(var(--background-color) var(--dot-gutter), transparent 0)
+      center,
     var(--on-background-color);
   background-size: var(--dot-grid-size) var(--dot-grid-size);
 }
@@ -108,9 +92,9 @@ since the flex lines stretch equally, we need multiple queries to prevent the wo
   #app {
     grid-template-columns: 3fr minmax(340px, 2fr);
     grid-template-rows: min-content 1fr;
-    grid-template-areas: 
-    "preview title"
-    "preview work-area";
+    grid-template-areas:
+      "preview title"
+      "preview work-area";
   }
 
   /* Add side borders to phones and tablets */
