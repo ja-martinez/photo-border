@@ -55,8 +55,8 @@ function useScaledPreviewImage(image) {
 export default useScaledPreviewImage;
 
 function getPreviewDimensions() {
-  const preview = document.getElementById("preview");
-
+  const preview = document.getElementsByClassName("preview")[0];
+  
   return {
     width: preview.offsetWidth,
     height: preview.offsetHeight,

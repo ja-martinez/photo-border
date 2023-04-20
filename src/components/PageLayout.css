@@ -27,13 +27,13 @@
   font-family: "Work Sans";
 }
 
-#work-area {
+.work-area {
   grid-area: work-area;
 
   overflow: scroll;
 }
 
-#app > #preview {
+#app > .preview {
   grid-area: preview;
 
   /* this min-height prevents aspect-ratio from changing the minimum size
@@ -69,7 +69,7 @@ since the flex lines stretch equally, we need multiple queries to prevent the wo
     flex-wrap: wrap-reverse;
   }
 
-  #preview {
+  .preview {
     order: 1;
     flex-basis: 100%;
     min-width: 50%;
@@ -83,7 +83,7 @@ since the flex lines stretch equally, we need multiple queries to prevent the wo
 } */
 
 /* @media (min-width: 1000) {
-  #preview {
+  .preview {
     min-width: 60%;
   }
 } */

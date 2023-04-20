@@ -10,8 +10,8 @@ function PageLayout({ previewContent, workAreaContent }) {
   return (
     <div id="app">
       <div id="title">INSTA-BORDERS</div>
-      <div id="preview">{previewContent}</div>
-      <div id="work-area">
+      <div className="preview">{previewContent}</div>
+      <div className="work-area">
         {workAreaContent && workAreaContent}
         <AboutSection />
       </div>
