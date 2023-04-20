@@ -26,10 +26,10 @@ function MainScreen({ image, onFileChange }) {
   const [additionalBorder, setAdditionalBorder] = useState(0);
   const [color, setColor] = useState(INITIAL_COLOR);
 
-  const scaledImageCanvas = useScaledPreviewImage(image);
+  const scaledImage = useScaledPreviewImage(image);
 
   const { onExport, canvasRef } = useCanvas(
-    scaledImageCanvas,
+    scaledImage,
     aspectRatio,
     additionalBorder,
     color

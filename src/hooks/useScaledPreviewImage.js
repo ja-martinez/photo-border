@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import debounce from "../utils/debounce";
 
 function useScaledPreviewImage(image) {
-  const [scaledImageCanvas, setScaledImageCanvas] = useState();
+  const [scaledImage, setScaledImage] = useState();
   const [previewDimensions, setPreviewDimensions] =
     useState(getPreviewDimensions);
 
@@ -22,7 +22,7 @@ function useScaledPreviewImage(image) {
     const imageCanvas = document.createElement("canvas");
     const ctx = imageCanvas.getContext("2d", { alpha: false });
 
-    const {width: previewWidth, height: previewHeight} = previewDimensions;
+    const { width: previewWidth, height: previewHeight } = previewDimensions;
 
     const oWidth = image.naturalWidth;
     const oHeight = image.naturalHeight;
@@ -34,7 +34,10 @@ function useScaledPreviewImage(image) {
       window.devicePixelRatio;
 
     // image doesn't need to be scaled down
-    if (scaleFactor >= 1) return;
+    if (scaleFactor >= 1) {
+      setScaledImage(image);
+      return;
+    }
 
     const newWidth = Math.round(oWidth * scaleFactor);
     const newHeight = Math.round(oHeight * scaleFactor);
@@ -44,19 +47,19 @@ function useScaledPreviewImage(image) {
 
     ctx.drawImage(image, 0, 0, newWidth, newHeight);
 
-    setScaledImageCanvas(imageCanvas);
+    setScaledImage(imageCanvas);
 
     return () => imageCanvas.remove();
   }, [previewDimensions, image]);
 
-  return scaledImageCanvas;
+  return scaledImage;
 }
 
 export default useScaledPreviewImage;
 
 function getPreviewDimensions() {
   const preview = document.getElementsByClassName("preview")[0];
-  
+
   return {
     width: preview.offsetWidth,
     height: preview.offsetHeight,

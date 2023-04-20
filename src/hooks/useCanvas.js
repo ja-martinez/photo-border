@@ -15,6 +15,7 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
       originalImageWidth = image.naturalWidth;
       originalImageHeight = image.naturalHeight;
     } else {
+      // it is a canvas element
       originalImageWidth = image.width;
       originalImageHeight = image.height;
     }
