@@ -32,6 +32,7 @@ function MainScreen({ image, onFileChange }) {
   const scaledImage = useScaledPreviewImage(image);
 
   const { handleExport, canvasRef } = useCanvas(
+    image,
     scaledImage,
     aspectRatio,
     additionalBorder,
