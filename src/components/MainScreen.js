@@ -26,9 +26,12 @@ function MainScreen({ image, onFileChange }) {
   const [additionalBorder, setAdditionalBorder] = useState(0);
   const [color, setColor] = useState(INITIAL_COLOR);
 
+  const [isOnExportScreen, setIsOnExportScreen] = useState(false);
+  const onExport = () => setIsOnExportScreen(true);
+
   const scaledImage = useScaledPreviewImage(image);
 
-  const { onExport, canvasRef } = useCanvas(
+  const { handleExport, canvasRef } = useCanvas(
     scaledImage,
     aspectRatio,
     additionalBorder,
@@ -52,6 +55,8 @@ function MainScreen({ image, onFileChange }) {
           <ActionsSection onExport={onExport} onFileChange={onFileChange} />
         </>
       }
+      isOnExportScreen={isOnExportScreen}
+      setIsOnExportScreen={setIsOnExportScreen}
     />
   );
 }

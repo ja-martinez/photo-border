@@ -60,6 +60,10 @@
   background-size: var(--dot-grid-size) var(--dot-grid-size);
 }
 
+.export {
+  z-index: 2;
+}
+
 /* 
 since the flex lines stretch equally, we need multiple queries to prevent the work-area/title section from getting too big. Will have to figure those out when I have the fluid text scaling and the content.
 */

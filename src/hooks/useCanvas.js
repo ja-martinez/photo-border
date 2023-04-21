@@ -54,7 +54,7 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
     );
   }, [image, color, additionalBorder, aspectRatio]);
 
-  function onExport() {
+  function handleExport() {
     const url = canvasRef.current.toDataURL("image/jpeg", 1.0);
     const link = document.createElement("a");
     // TODO: preserve image name
@@ -66,7 +66,7 @@ function useCanvas(image, aspectRatio, additionalBorder, color) {
   }
 
   return {
-    onExport,
+    handleExport,
     canvasRef,
   };
 }
